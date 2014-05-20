@@ -1,4 +1,4 @@
 cheesecake
 ==========
 
-A tethering software for your pht
+A tethering software for your photo booth
