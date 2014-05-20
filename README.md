@@ -1,4 +1,1 @@
-cheesecake
-==========
-
-A tethering software for your photo booth
+sudo apt-get install libgphoto2-2-dev
