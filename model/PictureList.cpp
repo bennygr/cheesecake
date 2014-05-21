@@ -9,6 +9,7 @@ void PictureList::AddPicture(Picture* picture)
 {
 	this->pictureList.push_back(picture);
 	std::cout << picture->GetFullPath().toStdString() << " added " << std::endl;
+	emit PictureAdded(picture);
 }
 
 bool PictureList::PictureExists(QString path)
@@ -25,9 +26,10 @@ bool PictureList::PictureExists(QString path)
 
 Picture* PictureList::GetNextPicture()
 {
-	if(this->pictureList.length() > 0)
-		return this->pictureList.at(0);
-	return NULL;
+	
+	if(this->nextPictureId >= this->pictureList.length())
+		this->nextPictureId = 0;
+	return this->pictureList.at(this->nextPictureId++);
 }
 
 void PictureList::UpdateList(QString path)
@@ -40,7 +42,6 @@ void PictureList::UpdateList(QString path)
 		{
 			Picture *newPicture = new Picture(files.at(i).absoluteFilePath());
 			this->AddPicture(newPicture);
-			emit PictureAdded(newPicture);
 		}
 	}
 
@@ -57,6 +58,10 @@ void PictureList::UpdateList(QString path)
 			pic = 0;
 		}
 	}
+
+	//initial set of next picture
+	if(this->nextPictureId == -1 && this->pictureList.count() > 0)
+		this->nextPictureId = 0;
 }
 
 void PictureList::DirectoryChanged(const QString& path)

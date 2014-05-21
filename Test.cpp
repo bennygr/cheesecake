@@ -8,6 +8,11 @@ Test::Test()
 {
 	this->setupUi(this);
 	this->pictureList = new PictureList("/home/bgr/Bilder/Wallpaper/");
+	this->slideTimer = new QTimer(this);
+	connect(slideTimer,
+		    SIGNAL(timeout()),
+			this,
+			SLOT(NextPicture()));
 	this->connect(pictureList, 
 				  SIGNAL(PictureAdded(Picture*)), 
 				  this, 
@@ -28,10 +33,14 @@ void Test::LoadPicture(Picture* picture)
 	pixMap.load(picture->GetFullPath());
 	this->pictureLabel->setPixmap(pixMap);
 }
+void Test::NextPicture()
+{
+	Picture* picture = this->pictureList->GetNextPicture();
+	LoadPicture(picture);
+}
 
 void Test::FullScreenToggled(bool fullscreen)
 {
-	std::cout << fullscreen << std::endl;
 	if(fullscreen)
 	{
 		this->showFullScreen();
@@ -53,9 +62,17 @@ void  Test::keyPressEvent(QKeyEvent *event)
 	{
 		FullScreenToggled(false);	
 	}
+	else if(event->key() == Qt::Key_Return)
+	{
+		NextPicture();		
+	}
 	else if(event->key() == Qt::Key_F11 &&
 	        actionFullscreen->isEnabled())
 	{
 		FullScreenToggled(true);	
 	}
+}
+void Test::NewSession()
+{
+	this->slideTimer->start(3000);
 }

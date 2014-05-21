@@ -1,5 +1,6 @@
 #include <QMainWindow>
 #include <QGraphicsScene>
+#include <QTimer>
 #include "Picture.h"
 #include "PictureList.h"
 #include "ui_untitled.h"
@@ -15,10 +16,11 @@ class Test : public QMainWindow, public Ui_MainWindow
 	private:
 		PictureList *pictureList;
 		void LoadPicture(Picture* picture);
+		QTimer *slideTimer;
 	private slots:
 		void PictureAdded(Picture* picture);
 		void FullScreenToggled(bool fullscreen);
-
-
+		void NextPicture();
+		void NewSession();
 };
 

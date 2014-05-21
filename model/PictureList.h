@@ -17,6 +17,7 @@ class PictureList : public QObject
 		QList<Picture*> pictureList;
 		QStringList fileExtensionFilter;
 		QFileSystemWatcher *fsWatcher;
+		int nextPictureId;
 
 		void AddPicture(Picture* picture);
 		void UpdateList(QString path);
@@ -34,6 +35,7 @@ class PictureList : public QObject
 
 		PictureList(QString directory)
 		{
+			nextPictureId = -1;
 			fileExtensionFilter.push_back("*.jpg");
 			fileExtensionFilter.push_back("*.JPG");
 			fileExtensionFilter.push_back("*.jpeg");
