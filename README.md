@@ -1,3 +1,3 @@
 #cheesecake
 
-A tethering software for your photo booth
+A simple tethering software for your photo booth
