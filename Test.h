@@ -10,10 +10,15 @@ class Test : public QMainWindow, public Ui_MainWindow
 
 	public:
 		Test();
+	protected:
+		virtual void  keyPressEvent(QKeyEvent *event);
 	private:
 		PictureList *pictureList;
 		void LoadPicture(Picture* picture);
 	private slots:
 		void PictureAdded(Picture* picture);
+		void FullScreenToggled(bool fullscreen);
+
+
 };
 
