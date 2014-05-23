@@ -71,8 +71,11 @@
           <property name="autoFillBackground">
            <bool>false</bool>
           </property>
+          <property name="styleSheet">
+           <string notr="true">QLabel { background-color : black; }&quot;);</string>
+          </property>
           <property name="text">
-           <string>TextLabel</string>
+           <string/>
           </property>
          </widget>
         </item>
@@ -103,12 +106,14 @@
     </property>
     <addaction name="actionFullscreen"/>
     <addaction name="actionNex_picture"/>
+    <addaction name="actionSlideshow"/>
    </widget>
    <widget class="QMenu" name="menuSession">
     <property name="title">
      <string>Session</string>
     </property>
     <addaction name="actionNew"/>
+    <addaction name="actionClose"/>
     <addaction name="actionQuit"/>
    </widget>
    <addaction name="menuSession"/>
@@ -123,12 +128,12 @@
   </action>
   <action name="actionNew">
    <property name="text">
-    <string>New</string>
+    <string>New session</string>
    </property>
   </action>
   <action name="actionQuit">
    <property name="text">
-    <string>Quit</string>
+    <string>Quit cheesecake</string>
    </property>
   </action>
   <action name="actionFullscreen">
@@ -145,6 +150,19 @@
   <action name="actionNex_picture">
    <property name="text">
     <string>Nex picture</string>
+   </property>
+  </action>
+  <action name="actionClose">
+   <property name="text">
+    <string>Close session</string>
+   </property>
+  </action>
+  <action name="actionSlideshow">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Slideshow</string>
    </property>
   </action>
  </widget>
@@ -205,8 +223,40 @@
    <slot>close()</slot>
    <hints>
     <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
      <x>335</x>
      <y>274</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>actionClose</sender>
+   <signal>triggered()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>CloseSession()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>335</x>
+     <y>274</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>actionSlideshow</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>MainWindow</receiver>
+   <slot>SlideShowToggled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
     </hint>
     <hint type="destinationlabel">
      <x>335</x>
@@ -220,5 +270,7 @@
   <slot>FullScreenToggled(bool)</slot>
   <slot>NextPicture()</slot>
   <slot>NewSession()</slot>
+  <slot>CloseSession()</slot>
+  <slot>SlideShowToggled(bool)</slot>
  </slots>
 </ui>

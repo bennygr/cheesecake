@@ -1,0 +1,2 @@
+#!/bin/bash
+gphoto2 --capture-tethered --filename $1%H%M%S.%C

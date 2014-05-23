@@ -1,15 +1,16 @@
 //-----------------------------------------------------------------------------
-#ifndef PICTURE_LIST_H
-#define PICTURE_LIST_H
+#ifndef SESSION_H
+#define SESSION_H
 //-----------------------------------------------------------------------------
 #include <iostream>
 #include <QString>
 #include <QStringList>
 #include <QFileSystemWatcher>
+#include "InputExecutor.h"
 #include "Picture.h"
 //-----------------------------------------------------------------------------
 
-class PictureList : public QObject
+class Session : public QObject
 {
 	Q_OBJECT
 
@@ -18,6 +19,7 @@ class PictureList : public QObject
 		QStringList fileExtensionFilter;
 		QFileSystemWatcher *fsWatcher;
 		int nextPictureId;
+		InputExecutor *executor;
 
 		void AddPicture(Picture* picture);
 		void UpdateList(QString path);
@@ -30,11 +32,9 @@ class PictureList : public QObject
 		void PictureAdded(Picture* picture);
 
 	public:
-
-		Picture* GetNextPicture();
-
-		PictureList(QString directory)
+		Session(QString directory,QString executorPath)
 		{
+			this->executor = new InputExecutor(executorPath,directory);
 			nextPictureId = -1;
 			fileExtensionFilter.push_back("*.jpg");
 			fileExtensionFilter.push_back("*.JPG");
@@ -50,6 +50,9 @@ class PictureList : public QObject
 			UpdateList(directory);
 		}
 
+		Picture* GetNextPicture();
+		void Start();
+		void Stop();
 
 };
 //-----------------------------------------------------------------------------

@@ -1,18 +1,18 @@
-#include "PictureList.h"
+#include "Session.h"
 #include <QDir>
 #include <QFileInfo>
 #include <QList>
 
 //-----------------------------------------------------------------------------
 
-void PictureList::AddPicture(Picture* picture)
+void Session::AddPicture(Picture* picture)
 {
 	this->pictureList.push_back(picture);
 	std::cout << picture->GetFullPath().toStdString() << " added " << std::endl;
 	emit PictureAdded(picture);
 }
 
-bool PictureList::PictureExists(QString path)
+bool Session::PictureExists(QString path)
 {
 	for(int i=0;i < this->pictureList.length();i++)
 	{
@@ -24,7 +24,17 @@ bool PictureList::PictureExists(QString path)
 	return false;
 }
 
-Picture* PictureList::GetNextPicture()
+void Session::Start()
+{
+	this->executor->Start();
+}
+
+void Session::Stop()
+{
+	this->executor->Stop();
+}
+
+Picture* Session::GetNextPicture()
 {
 	
 	if(this->nextPictureId >= this->pictureList.length())
@@ -32,7 +42,7 @@ Picture* PictureList::GetNextPicture()
 	return this->pictureList.at(this->nextPictureId++);
 }
 
-void PictureList::UpdateList(QString path)
+void Session::UpdateList(QString path)
 {
 	QDir *dir = new QDir(path);
 	QFileInfoList files = dir->entryInfoList(this->fileExtensionFilter);
@@ -64,7 +74,7 @@ void PictureList::UpdateList(QString path)
 		this->nextPictureId = 0;
 }
 
-void PictureList::DirectoryChanged(const QString& path)
+void Session::DirectoryChanged(const QString& path)
 {
 	UpdateList(path);
 }
