@@ -30,6 +30,10 @@ void Test::StartSession()
 	{
 		SlideShowToggled(true);
 	}
+	statusLabel->setText("Session started");
+	actionNew->setEnabled(false);
+	actionClose->setEnabled(true);
+	actionNex_picture->setEnabled(true);
 }
 
 void Test::keyPressEvent(QKeyEvent *event)
@@ -75,14 +79,14 @@ void Test::SlideShowToggled(bool slide)
 {
 	if(session != NULL)
 	{
-		if(!slide)
+		if(!slide && this->slideTimer != NULL)
 		{
 			this->slideTimer->stop();
 			delete this->slideTimer;
 			this->slideTimer = NULL;
-			std::cout << "Slide show stopped" << std::endl;
+			this->statusLabel->setText("Slide show stopped.");
 		}
-		else
+		else if(slide)
 		{
 			this->slideTimer = new QTimer(this);
 			connect(slideTimer,
@@ -90,7 +94,7 @@ void Test::SlideShowToggled(bool slide)
 					this,
 					SLOT(NextPicture()));
 			this->slideTimer->start(3000);
-			std::cout << "Slide show started" << std::endl;
+			this->statusLabel->setText("Slide show started.");
 		}
 	}
 }
@@ -113,12 +117,13 @@ void Test::NewSession()
 	{
 		CloseSession();
 	}
-	std::cout << "N" << std::endl;
+	LoadPicture(NULL);
 	this->inputExecutors = 
 		this->inputExecutorReader.GetExecutorsFromDirectory(QDir::currentPath());
 	QString dir = "/home/bgr/Bilder/Wallpaper/";
 	QString executor = inputExecutors.at(0).filePath();
 	this->session = new Session(dir,executor);
+	this->pictureLabel->setScaledContents(true);
 	StartSession();
 }
 
@@ -130,7 +135,18 @@ void Test::CloseSession()
 		session->Stop();
 		delete session;
 		session = NULL;
-		std::cout << "Session closed" << std::endl;
+		statusLabel->setText("Session closed");
 		LoadPicture(NULL);
+		actionNew->setEnabled(true);
+		actionNex_picture->setEnabled(false);
+		actionClose->setEnabled(false);
+		this->pictureLabel->setScaledContents(false);
+		LoadPicture(this->welcome);
 	}
+}
+
+void Test::About()
+{
+	about->setModal(true);
+	about->show();
 }

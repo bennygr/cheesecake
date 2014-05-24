@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>671</width>
-    <height>550</height>
+    <width>439</width>
+    <height>395</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -40,8 +40,8 @@
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>669</width>
-         <height>503</height>
+         <width>437</width>
+         <height>348</height>
         </rect>
        </property>
        <property name="sizePolicy">
@@ -77,6 +77,9 @@
           <property name="text">
            <string/>
           </property>
+          <property name="alignment">
+           <set>Qt::AlignCenter</set>
+          </property>
          </widget>
         </item>
        </layout>
@@ -90,7 +93,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>671</width>
+     <width>439</width>
      <height>23</height>
     </rect>
    </property>
@@ -180,7 +183,7 @@
     </hint>
     <hint type="destinationlabel">
      <x>335</x>
-     <y>274</y>
+     <y>254</y>
     </hint>
    </hints>
   </connection>
@@ -196,7 +199,7 @@
     </hint>
     <hint type="destinationlabel">
      <x>335</x>
-     <y>274</y>
+     <y>254</y>
     </hint>
    </hints>
   </connection>
@@ -212,7 +215,7 @@
     </hint>
     <hint type="destinationlabel">
      <x>335</x>
-     <y>274</y>
+     <y>254</y>
     </hint>
    </hints>
   </connection>
@@ -228,7 +231,7 @@
     </hint>
     <hint type="destinationlabel">
      <x>335</x>
-     <y>274</y>
+     <y>254</y>
     </hint>
    </hints>
   </connection>
@@ -244,7 +247,7 @@
     </hint>
     <hint type="destinationlabel">
      <x>335</x>
-     <y>274</y>
+     <y>254</y>
     </hint>
    </hints>
   </connection>
@@ -260,7 +263,23 @@
     </hint>
     <hint type="destinationlabel">
      <x>335</x>
-     <y>274</y>
+     <y>254</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>actionAbout</sender>
+   <signal>triggered()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>About()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>183</x>
+     <y>236</y>
     </hint>
    </hints>
   </connection>
@@ -272,5 +291,6 @@
   <slot>NewSession()</slot>
   <slot>CloseSession()</slot>
   <slot>SlideShowToggled(bool)</slot>
+  <slot>About()</slot>
  </slots>
 </ui>
