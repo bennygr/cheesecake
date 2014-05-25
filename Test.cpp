@@ -3,6 +3,7 @@
 #include <QPixmap>
 #include <QKeyEvent>
 #include <QGraphicsPixmapItem>
+#include <QFileDialog>
 #include "InputExecutor.h"
 
 void Test::LoadPicture(Picture* picture)
@@ -56,7 +57,13 @@ void Test::keyPressEvent(QKeyEvent *event)
 
 void Test::PictureAdded(Picture* picture)
 {
+	if(this->actionSlideshow->isChecked())
+		this->slideTimer->stop();
+
 	LoadPicture(picture);
+
+	if(this->actionSlideshow->isChecked())
+		this->slideTimer->start(this->slideTime);
 }
 
 void Test::FullScreenToggled(bool fullscreen)
@@ -77,6 +84,7 @@ void Test::FullScreenToggled(bool fullscreen)
 
 void Test::SlideShowToggled(bool slide)
 {
+	this->actionSlideshow->setChecked(slide);
 	if(session != NULL)
 	{
 		if(!slide && this->slideTimer != NULL)
@@ -93,7 +101,7 @@ void Test::SlideShowToggled(bool slide)
 					SIGNAL(timeout()),
 					this,
 					SLOT(NextPicture()));
-			this->slideTimer->start(3000);
+			this->slideTimer->start(this->slideTime);
 			this->statusLabel->setText("Slide show started.");
 		}
 	}
@@ -113,18 +121,36 @@ void Test::NextPicture()
 
 void Test::NewSession()
 {
+	CreateSession("");
+}
+
+void Test::CreateSession(QString sessionDir)
+{
 	if(session != NULL)
 	{
 		CloseSession();
 	}
-	LoadPicture(NULL);
-	this->inputExecutors = 
-		this->inputExecutorReader.GetExecutorsFromDirectory(QDir::currentPath());
-	QString dir = "/home/bgr/Bilder/Wallpaper/";
-	QString executor = inputExecutors.at(0).filePath();
-	this->session = new Session(dir,executor);
-	this->pictureLabel->setScaledContents(true);
-	StartSession();
+
+	if(sessionDir.isEmpty())	
+	{
+		sessionDir = QFileDialog::getExistingDirectory ();
+	}
+
+    if ( sessionDir.isNull() == false )
+	{
+		if(!sessionDir.endsWith(QDir::separator()))
+		{
+			sessionDir += QDir::separator();
+		}
+
+		LoadPicture(NULL);
+		QString executor ="gphoto2 --capture-tethered --filename " + 
+			sessionDir + 
+			"%H%M%S.%C";
+		this->session = new Session(sessionDir,executor,false);
+		this->pictureLabel->setScaledContents(true);
+		StartSession();
+	}
 }
 
 void Test::CloseSession()

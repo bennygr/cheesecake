@@ -36,7 +36,8 @@ void Session::Stop()
 
 Picture* Session::GetNextPicture()
 {
-	
+	if(this->pictureList.length() == 0)
+		return NULL;
 	if(this->nextPictureId >= this->pictureList.length())
 		this->nextPictureId = 0;
 	return this->pictureList.at(this->nextPictureId++);

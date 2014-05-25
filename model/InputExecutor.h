@@ -4,20 +4,32 @@
 //-----------------------------------------------------------------------------
 #include <QList>
 #include <QString>
+#include <QProcess>
+#include <QThread>
 //-----------------------------------------------------------------------------
-class InputExecutor
+class InputExecutor  : protected QThread
 {
+	Q_OBJECT
+	
 	private:
 		QString pathToExecutor;
-		QString inputDirectory;
+		QProcess *process;
 		bool isRunning;
+		bool resetUsb;
+		void run(); 
+		void ResetUsb();
+
+	signals:
+		void Started();
+		void Stopped();
 
 	public:
-		InputExecutor(QString pathToExecutor,QString inputDirectory)
-			: pathToExecutor(pathToExecutor),
-			  inputDirectory(inputDirectory)
+		InputExecutor(QString pathToExecutor,bool resetUsb)
+			: pathToExecutor(pathToExecutor)
 			{
 				isRunning = false;
+				this->resetUsb = resetUsb; 
+				process = NULL; 
 			}
 
 		QString getPathToExecutor();

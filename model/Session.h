@@ -32,9 +32,9 @@ class Session : public QObject
 		void PictureAdded(Picture* picture);
 
 	public:
-		Session(QString directory,QString executorPath)
+		Session(QString directory,QString executorPath,bool resetUsb)
 		{
-			this->executor = new InputExecutor(executorPath,directory);
+			this->executor = new InputExecutor(executorPath,resetUsb);
 			nextPictureId = -1;
 			fileExtensionFilter.push_back("*.jpg");
 			fileExtensionFilter.push_back("*.JPG");
