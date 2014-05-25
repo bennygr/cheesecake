@@ -7,7 +7,7 @@ A simple tethering software for your photo booth
 ## What is cheesecake?
 Cheesecake is a very simple tethering software for your party photo booth.
 
-Cheesecake "talks" to a camera connected to your computer and if you take a picture it will be downloaded directly into a specified session directory. Cheesecake can view new pictures immediately and show older pictures in an endles slide show.
+Cheesecake "talks" to a camera connected to your computer and if you take a picture it will be downloaded directly into a specified session directory. Cheesecake can view new pictures immediately and show older pictures in an endless slide show.
 
 
 ##Features
