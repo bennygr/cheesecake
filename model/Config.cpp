@@ -39,11 +39,11 @@ bool Config::ParseArguments(int argc, char** argv)
 		    help += "\r\n";
 			help += "./cheesecake [--fullScreen] [--startSlideShow ] [--sessionDir DIR] [--help]";
 		    help += "\r\n";
-		    help += "--fullscreen\t\t\tEnable fullscreen mode on startup";
+		    help += "--fullScreen\t\t\tEnables fullscreen mode on startup";
 		    help += "\r\n";
-		    help += "--startSlideShow\t\tEnable slide show mode on startup";
+		    help += "--startSlideShow\t\tEnables slide show mode on startup";
 		    help += "\r\n";
-		    help += "--sessionDir\t\t\tStart a session in the specified directory";
+		    help += "--sessionDir\t\t\tStarts a session in the specified directory";
 		    help += "\r\n";
 		    help += "--help\t\t\t\tPrints this text and terminates cheesecake";
 		    help += "\r\n";
@@ -84,8 +84,8 @@ bool Config::ParseArguments(int argc, char** argv)
 			}
 		}
 
-		return true;
 	}
+	return true;
 }
 
 //-----------------------------------------------------------------------------
