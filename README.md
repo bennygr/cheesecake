@@ -16,6 +16,13 @@ Cheesecake "talks" to a camera connected to your computer and if you take a pict
   - A Simple image viewer with full screen support shows the last picture taken
   - The slide show mode can show all pictures taken during a session while new pictures are still shown immediately 
 
+##Build
+
+    apt-get install qt-sdk
+    apt-get install gphoto2
+    qmake
+    make
+  
 ##Usage
 
 ```
