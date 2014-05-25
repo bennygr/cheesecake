@@ -27,8 +27,8 @@ Cheesecake "talks" to a camera connected to your computer and if you take a pict
 
 ```
 ./cheesecake [--fullScreen] [--startSlideShow ] [--sessionDir DIR] [--help]
---fullScreen			Enable fullscreen mode on startup
---startSlideShow	    Enable slide show mode on startup
---sessionDir			Start a session in the specified directory
+--fullScreen			Enables fullscreen mode on startup
+--startSlideShow	    Enables slide show mode on startup
+--sessionDir			Starts a session in the specified directory
 --help				    Prints this text and terminates cheesecake
 ```
